@@ -2,7 +2,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <h1 v-if="!editStatus" class="modal-title fs-5" id="exampleModalLabel">{{updatedName || recipelist.name}}
+            <i class="fas fa-edit" @click="editName"></i></h1>
+            <div v-else class="d-flex">
+              <input type="text" class="form-control" v-model="inputValue">
+              <button class="btn btn-info ms-2" @click="saveChanges">Save</button>
+            </div>
             <button
               type="button"
               class="btn-close"
@@ -18,3 +23,27 @@
         </div>
       </div>
 </template>
+<script setup>
+import { ref } from 'vue';
+
+const propsValue = defineProps(['recipelist','name'])
+const emitValue2 = defineEmits(['updateNameToParent'])
+// defineProps({
+//   recipelist:{
+//     type:Object,
+//     required:true
+//   }
+// })
+const inputValue = ref(propsValue.recipelist.name)
+const updatedName = ref('')
+const editStatus = ref(false)
+const editName = ()=>{
+  editStatus.value = true
+}
+const saveChanges = ()=>{
+  editStatus.value = false
+  updatedName.value = inputValue.value
+  emitValue2('updateNameToParent',updatedName.value)
+  
+}
+</script>
