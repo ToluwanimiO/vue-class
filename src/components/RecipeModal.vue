@@ -27,7 +27,7 @@
 import { ref } from 'vue';
 
 const propsValue = defineProps(['recipelist','name'])
-const emitValue2 = defineEmits(['updateNameToParent'])
+const emitValue2 = defineEmits(['updateNameToParent','changeName'])
 // defineProps({
 //   recipelist:{
 //     type:Object,
@@ -43,6 +43,7 @@ const editName = ()=>{
 const saveChanges = ()=>{
   editStatus.value = false
   updatedName.value = inputValue.value
+  console.log(emitValue2)
   emitValue2('updateNameToParent',updatedName.value)
   
 }
