@@ -1,12 +1,13 @@
 <template>
     This is our Home Page
-    <HomeDetails>
+    <HomeDetails >
         <template #tope>
             <p>More details about Home</p>
             <p>For more questions, go to FAQ</p>
         </template>
-        <template v-slot:mary>
+        <template v-slot:mary="maryProps">
             <p>Mary's details</p>
+            {{ maryProps.message }}
         </template>
     </HomeDetails>
 </template>
